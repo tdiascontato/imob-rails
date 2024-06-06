@@ -10,7 +10,13 @@ gem "puma", ">= 5.0"
 
 gem 'mongoid', '~> 8.1', '>= 8.1.2'
 
-gem "bcrypt", "~> 3.1.7"
+gem 'bcrypt', '~> 3.1', '>= 3.1.12'
+
+gem 'jwt', '~> 1.5', '>= 1.5.4'
+
+gem 'pry-rails'
+
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
@@ -21,4 +27,3 @@ gem "bootsnap", require: false
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 end
-
