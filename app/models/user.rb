@@ -4,16 +4,23 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  attr_accessor :password
+
   field :email, type: String
   field :password_digest, type: String
+  field :token, type: String
 
   store_in collection: "User"
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
 
-  def password=(new_password)
-    self.password_digest = BCrypt::Password.create(new_password)
+  before_save :encrypt_password
+
+  def encrypt_password
+    if password.present?
+      self.password_digest = BCrypt::Password.create(password)
+    end
   end
 
   def authenticate(password)

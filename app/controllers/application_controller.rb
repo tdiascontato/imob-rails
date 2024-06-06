@@ -5,10 +5,17 @@ class ApplicationController < ActionController::API
 
   def authenticate_request
     header = request.headers['Authorization']
-    header = header.split(' ').last if header
-    decoded = JsonWebToken.decode(header)
-    @current_user = User.find(decoded[:user_id]) if decoded
-  rescue ActiveRecord::RecordNotFound, JWT::DecodeError, JWT::ExpiredSignature
-    render json: { message: 'Token inválido!' }, status: :unauthorized
+    token = header.split(' ').last if header
+
+    begin
+      decoded_token = JsonWebToken.decode(token)
+      @current_user = User.find_by(_id: decoded_token[:user_id], token: token)
+
+      unless @current_user
+        render json: { message: 'Token inválido ou usuário não autenticado' }, status: :unauthorized
+      end
+    rescue ActiveRecord::RecordNotFound, JWT::DecodeError, JWT::ExpiredSignature, JWT::VerificationError
+      render json: { message: 'Token inválido!' }, status: :unauthorized
+    end
   end
 end
