@@ -18,4 +18,11 @@ class ApplicationController < ActionController::API
       render json: { message: 'Token inválido!' }, status: :unauthorized
     end
   end
+
+  def log_action(action, body)
+    Log.create(action: action, function: action_name, path: request.path, body: body.to_json, user_id: @current_user._id)
+  rescue => e
+    Rails.logger.error("Failed to log action: #{e.message}")
+  end
+
 end

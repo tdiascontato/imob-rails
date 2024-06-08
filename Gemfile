@@ -16,6 +16,8 @@ gem 'jwt', '~> 1.5', '>= 1.5.4'
 
 gem 'pry-rails'
 
+gem 'carrierwave', '~> 3.0'
+
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'dotenv-rails', groups: [:development, :test]

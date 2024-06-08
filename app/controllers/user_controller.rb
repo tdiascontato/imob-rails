@@ -12,14 +12,14 @@ class UserController < ApplicationController
       user = User.new(email: email, password: password)
 
       if user.save
-        log_action('Success Register', params)
+        log_action('Success Register', { email: email, password: password })
         render json: { message: 'Usuário registrado!', data: user }, status: 200
       else
-        log_action('Fail Register', params)
+        log_action('Fail Register', { email: email, password: password })
         render json: { message: "Usuário não registrado. Erro: #{user.errors.full_messages.join(', ')}" }, status: 422
       end
     rescue => e
-      log_action('Fail Function Register', params)
+      log_action('Fail Function Register', { email: email, password: password })
       render json: { message: "Erro ao registrar: #{e.message}" }, status: 500
     end
   end
@@ -37,10 +37,10 @@ class UserController < ApplicationController
     if user&.authenticate(password)
       token = JsonWebToken.encode(user_id: user._id)
       user.update(token: token)
-      log_action('Sucess login', params)
+      log_action('Sucess login', { email: email, password: password, user: user })
       render json: { message: 'Login successful!', token: token }, status: 200
     else
-      log_action('Fail login', params)
+      log_action('Fail login', { email: email, password: password })
       render json: { message: 'Email ou password incorretos!' }, status: 401
     end
   end
@@ -56,10 +56,4 @@ class UserController < ApplicationController
     end
   end
 
-  private
-  def log_action(action, body)
-    Log.create(action: action, function: action_name, path: request.path, body: body.to_unsafe_h, user: @current_user)
-  rescue => e
-    Rails.logger.error("Failed to log action: #{e.message}")
-  end
 end

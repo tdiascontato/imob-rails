@@ -12,6 +12,8 @@ class User
 
   store_in collection: "User"
 
+  # has_many :works, class_name: 'Work'
+
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, on: :create
 
