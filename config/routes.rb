@@ -1,3 +1,4 @@
+# config/routes.rb
 Rails.application.routes.draw do
   post '/register', to: 'user#register'
   post '/login', to: 'user#login'
@@ -5,9 +6,11 @@ Rails.application.routes.draw do
 
   post '/work/register', to: 'work#register'
 
-  get '/user/works', to: 'work#get_works'
-  get 'storage/work_images/:filename', to: 'work#show_images', constraints: { filename: /[^\/]+/ }
+  get '/user/works', to: 'work#user_works'
+  get '/user/perfil', to: 'user#get_user'
+  patch '/user/perfil', to: 'user#patch_user'
+  post '/user/delete', to: 'user#user_delete'
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  get 'storage/work_images/:filename', to: 'work#work_images', constraints: { filename: /[^\/]+/ }
+
 end

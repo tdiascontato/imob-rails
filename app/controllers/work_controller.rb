@@ -1,6 +1,6 @@
 # app/controllers/work_controller.rb
 class WorkController < ApplicationController
-  skip_before_action :authenticate_request, only: [:show_images]
+  skip_before_action :authenticate_request, only: [:work_images]
   def register
     title = params[:title]
     description = params[:description]
@@ -28,7 +28,7 @@ class WorkController < ApplicationController
     end
   end
 
-  def get_works
+  def user_works
     user_id = @current_user._id
     begin
       works = Work.where(user_id: user_id)
@@ -40,7 +40,7 @@ class WorkController < ApplicationController
 
   end
 
-  def show_images
+  def work_images
     filename = params[:filename]
     filepath = Rails.root.join('storage', 'work_images', filename)
 

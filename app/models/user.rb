@@ -6,9 +6,12 @@ class User
 
   attr_accessor :password
 
+  field :name, :type => String
   field :email, type: String
   field :password_digest, type: String
+  field :image, type: String
   field :token, type: String
+  field :premium, type: Boolean
 
   store_in collection: "User"
 
