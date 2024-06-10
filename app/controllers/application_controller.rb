@@ -26,4 +26,14 @@ class ApplicationController < ActionController::API
     Rails.logger.error("Failed to log action: #{e.message}")
   end
 
+  def delete_image(image_path)
+
+    return if image_path.blank?
+
+    relative_path = URI.parse(image_path).path
+    filepath = 'public' + relative_path
+
+    File.delete(filepath) if File.exist?(filepath)
+  end
+
 end
