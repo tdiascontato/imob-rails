@@ -119,6 +119,4 @@ class WorkController < ApplicationController
     "/storage/work_images/#{filename}"
   end
 
-
-
 end
