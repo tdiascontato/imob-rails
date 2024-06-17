@@ -1,9 +1,10 @@
 # config/routes.rb
 Rails.application.routes.draw do
-  # Registro,Login e Logout
+  # Registro,Login, Logout e Mall
   post '/register', to: 'user#register'
   post '/login', to: 'user#login'
   post '/logout', to: 'user#logout'
+  get '/mall', to: 'work#mall'
   # Registro, view, Update e Delete de Works
   post '/work/register', to: 'work#register'
   get '/user/works', to: 'work#get_works'

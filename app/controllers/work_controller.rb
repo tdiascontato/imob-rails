@@ -1,6 +1,6 @@
 # app/controllers/work_controller.rb
 class WorkController < ApplicationController
-
+  skip_before_action :authenticate_request, only: [:mall]
   def register
 
     title = params[:title]
@@ -100,6 +100,15 @@ class WorkController < ApplicationController
     end
   end
 
+  def mall
+    begin
+      works = Work.all
+      puts works
+      render json: { works: works }, status: 200
+    rescue Exception => e
+      log_action('Fail mall', {Error: e, request: request})
+    end
+  end
 
   private
 
