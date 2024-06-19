@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post '/register', to: 'user#register'
   post '/login', to: 'user#login'
   post '/logout', to: 'user#logout'
+  post '/search', to: 'work#search'
   get '/mall', to: 'work#mall'
   # Registro, view, Update e Delete de Works
   post '/work/register', to: 'work#register'

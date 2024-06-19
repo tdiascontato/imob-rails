@@ -1,6 +1,6 @@
 # app/controllers/work_controller.rb
 class WorkController < ApplicationController
-  skip_before_action :authenticate_request, only: [:mall]
+  skip_before_action :authenticate_request, only: [:mall, :search]
   def register
 
     title = params[:title]
@@ -107,8 +107,21 @@ class WorkController < ApplicationController
       render json: { works: works }, status: 200
     rescue Exception => e
       log_action('Fail mall', {Error: e, request: request})
+      render json: { Error: e }, status: 500
     end
   end
+
+  def search
+    title = params[:title]
+    begin
+      works = Work.where(title: /#{Regexp.escape(title)}/i)
+      render json: { works: works }, status: 200
+    rescue Exception => e
+        log_action('Fail Search', {Error: e, request: request})
+        render json: { Error: e }, status: 500
+    end
+  end
+
 
   private
 
