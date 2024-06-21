@@ -1,24 +1,58 @@
-# README
+# Imob Rails
+![image](https://github.com/tdiascontato/imob-rails/assets/98658691/7803d302-c1aa-4270-b905-33f09cdc69bf)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+Este é um aplicativo web construído com Ruby on Rails. A aplicação oferece gerenciamento de perfis de usuário, incluindo upload tratados de imagens e gerenciamento de assinaturas.
 
-* Ruby version
+## Funcionalidades
 
-* System dependencies
+- Autenticação de Usuário
+- Logs para depurações
+- Gerenciamento de Perfil
+  - Atualizar informações do perfil
+  - Upload e compressão de imagens de perfil
+- Gerenciamento de Assinaturas
+  - Visualizar e gerenciar planos de assinatura
+  - FUncionalidades diferentes por planos
 
-* Configuration
+## Instalação
 
-* Database creation
+1. **Clone o repositório:**
+   ```sh
+   git clone https://github.com/tdiascontato/imob-rails.git
+   cd imob-rails
+   ```
 
-* Database initialization
+2. **Instale as dependências:**
+   ```sh
+   bundle install
+   yarn install
+   ```
 
-* How to run the test suite
+3. **Configure o banco de dados:**
+   ```sh
+   rails db:create
+   rails db:migrate
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Uso
 
-* Deployment instructions
+1. **Inicie o servidor Rails:**
+   ```sh
+   rails server
+   ```
 
-* ...
+2. **Abra o navegador e acesse:**
+   ```
+   http://localhost:3000
+   ```
+
+## Estrutura do Projeto
+
+### Front-End em Vue presente em https://github.com/tdiascontato/imob-vue/
+![image](https://github.com/tdiascontato/imob-rails/assets/98658691/faa4697b-aaf1-4e44-b2d9-5b9f2857bb97)
+
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
